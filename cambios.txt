@@ -1,0 +1,662 @@
+================================================================================
+                    DOCUMENTACIÓN COMPLETA DE CAMBIOS
+                         Sistema de Inventario
+                        METODOLOGÍA BEM EXPLICADA
+================================================================================
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    ¿QUÉ ES BEM? (Block Element Modifier)                  ║
+║                                                                            ║
+║  BEM es una metodología de nomenclatura en CSS que te ayuda a:            ║
+║  • Organizar el código de forma clara y lógica                           ║
+║  • Evitar conflictos entre nombres de clases                            ║
+║  • Reutilizar componentes sin efectos secundarios                        ║
+║  • Mantener el código escalable y fácil de entender                      ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+═════════════════════════════════════════════════════════════════════════════
+                       ESTRUCTURA DE BEM EXPLICADA
+═════════════════════════════════════════════════════════════════════════════
+
+BEM tiene 3 componentes:
+
+1️⃣  BLOCK (Bloque)
+    ├─ Concepto independiente y reutilizable
+    ├─ Representa un componente completo
+    ├─ NO debe depender de otros elementos
+    └─ Ejemplo: .card, .header, .dashboard-card
+
+2️⃣  ELEMENT (Elemento)
+    ├─ Parte de un bloque
+    ├─ No puede existir de forma independiente
+    ├─ Se conecta al bloque con __ (dos guiones bajos)
+    └─ Ejemplo: .card__body, .header__logo, .dashboard-card__value
+
+3️⃣  MODIFIER (Modificador)
+    ├─ Variación de un bloque o elemento
+    ├─ Cambia apariencia o comportamiento
+    ├─ Se conecta con -- (dos guiones)
+    └─ Ejemplo: .card--success, .button--disabled, .header--sticky
+
+═════════════════════════════════════════════════════════════════════════════
+                           PATRONES BEM
+═════════════════════════════════════════════════════════════════════════════
+
+PATRÓN 1: Block
+───────────
+Nombre: .block-name
+Uso: Contenedor principal
+CSS:
+  .card {
+    border: none;
+    border-radius: 12px;
+  }
+
+HTML:
+  <div class="card">
+    Contenido...
+  </div>
+
+
+PATRÓN 2: Block__Element
+───────────
+Nombre: .block-name__element-name
+Uso: Partes de un bloque
+CSS:
+  .card__body {
+    padding: 1.5rem;
+  }
+  .card__title {
+    font-weight: 700;
+  }
+
+HTML:
+  <div class="card">
+    <div class="card__body">
+      <h5 class="card__title">Título</h5>
+    </div>
+  </div>
+
+
+PATRÓN 3: Block--Modifier
+───────────
+Nombre: .block-name--modifier-name
+Uso: Variantes del bloque
+CSS:
+  .card {
+    border-left: 4px solid var(--color-primary);
+  }
+  
+  .card--success {
+    border-left-color: var(--color-success);
+  }
+  
+  .card--warning {
+    border-left-color: var(--color-warning);
+  }
+
+HTML:
+  <div class="card">Ventas</div>
+  <div class="card card--success">Ventas Mes</div>
+  <div class="card card--warning">Inventario Bajo</div>
+
+
+PATRÓN 4: Block__Element--Modifier
+───────────
+Nombre: .block-name__element-name--modifier-name
+Uso: Variantes de elementos específicos
+CSS:
+  .dashboard-card-icon {
+    background: var(--gradient-primary);
+  }
+  
+  .dashboard-card-icon--success {
+    background: var(--gradient-success);
+  }
+  
+  .dashboard-card-icon--warning {
+    background: var(--gradient-warning);
+  }
+
+HTML:
+  <div class="dashboard-card-icon">
+    <i class="fas fa-dollar-sign"></i>
+  </div>
+  <div class="dashboard-card-icon dashboard-card-icon--success">
+    <i class="fas fa-calendar-alt"></i>
+  </div>
+
+═════════════════════════════════════════════════════════════════════════════
+              ERRORES COMUNES EN BEM (QUE PROBABLEMENTE HACÍAS)
+═════════════════════════════════════════════════════════════════════════════
+
+❌ ERROR 1: Nomenclatura incorrecta
+   MAL:     .card_body (un guion bajo)
+   MAL:     .card-body (sin guión bajo)
+   BIEN:    .card__body (dos guiones bajos)
+   
+   Por qué: Los dos guiones bajos indican claramente "esto es un elemento"
+
+❌ ERROR 2: Anidación confusa
+   MAL:     .card .card__header .card__header__title
+   BIEN:    .card__title
+   
+   Por qué: BEM NO usa anidación. Siempre va: BLOQUE__ELEMENTO
+
+❌ ERROR 3: Anidar modificadores
+   MAL:     .card__body--active__title
+   BIEN:    .card__title--active
+   
+   Por qué: Los modificadores se aplican directamente, no se anidan
+
+❌ ERROR 4: Usar estilos inline en HTML
+   MAL:     <div style="color: red; margin: 10px;">
+   BIEN:    <div class="card--warning">
+   
+   Por qué: BEM centraliza TODO en CSS, sin estilos inline
+
+❌ ERROR 5: Clases muy genéricas
+   MAL:     .title, .text, .container
+   BIEN:    .card__title, .card__text, .dashboard__container
+   
+   Por qué: Las clases deben identificar A QUÉ COMPONENTE pertenecen
+
+═════════════════════════════════════════════════════════════════════════════
+                   EJEMPLO REAL DE TU PROYECTO (ANTES vs DESPUÉS)
+═════════════════════════════════════════════════════════════════════════════
+
+ANTES (❌ Código Espagueti - MALO):
+────────────────────────────────────
+
+HTML:
+<div class="card dashboard-card">
+  <div class="card-body">
+    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+      <div class="dashboard-card-icon">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <h5 class="card-title mb-0">Ventas</h5>
+    </div>
+    <h3 style="color: var(--color-primary); font-weight: 700; margin-top: 1rem;">$0.00</h3>
+  </div>
+</div>
+
+PROBLEMAS:
+• Estilos inline en HTML (style="...")
+• Código duplicado en las 3 tarjetas
+• Difícil de mantener y actualizar
+• Mezcla de responsabilidades (HTML + CSS)
+• Clases sin relación clara con BEM
+
+────────────────────────────────────
+
+DESPUÉS (✅ BEM Limpio - BUENO):
+────────────────────────────────────
+
+HTML:
+<div class="card dashboard-card">
+  <div class="card-body">
+    <div class="dashboard-card__header">
+      <div class="dashboard-card-icon">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <h5 class="card-title mb-0">Ventas</h5>
+    </div>
+    <p class="card-text">Total de ventas registradas en el sistema.</p>
+    <h3 class="dashboard-card__value">$0.00</h3>
+  </div>
+</div>
+
+CSS:
+.dashboard-card__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dashboard-card__value {
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+VENTAJAS:
+• HTML completamente limpio, sin estilos inline
+• Cada clase tiene un propósito claro
+• Fácil de reutilizar y modificar
+• Responsabilidades separadas (HTML vs CSS)
+• Código mantenible a largo plazo
+
+═════════════════════════════════════════════════════════════════════════════
+              ESTRUCTURA BEM DE TU PROYECTO (DETALLADO)
+═════════════════════════════════════════════════════════════════════════════
+
+📦 BLOQUE: .card (Tarjeta genérica)
+│
+├─ ELEMENTO: .card__body
+│   └─ Cuerpo interno de la tarjeta
+│
+├─ ELEMENTO: .card__title
+│   └─ Título dentro de la tarjeta
+│
+└─ ELEMENTO: .card__text
+    └─ Texto descriptivo
+
+
+📦 BLOQUE: .dashboard-card (Tarjeta del dashboard)
+│   └─ EXTIENDE: .card (hereda estilos)
+│
+├─ MODIFICADOR: .dashboard-card--success
+│   └─ Variante para ventas exitosas (verde)
+│
+├─ MODIFICADOR: .dashboard-card--warning
+│   └─ Variante para inventario bajo (naranja)
+│
+├─ ELEMENTO: .dashboard-card__header
+│   └─ Encabezado de la tarjeta
+│
+├─ ELEMENTO: .dashboard-card__value
+│   └─ Valor/número a mostrar
+│
+└─ ELEMENTO: .dashboard-card-icon (sub-elemento)
+    ├─ MODIFICADOR: .dashboard-card-icon--success
+    │   └─ Ícono en color verde
+    │
+    └─ MODIFICADOR: .dashboard-card-icon--warning
+        └─ Ícono en color naranja
+
+
+📦 BLOQUE: .sidebar-card (Tarjeta del panel lateral)
+│   └─ EXTIENDE: .card
+│
+├─ ELEMENTO: .sidebar-card__title
+│   └─ Título del sidebar
+│
+└─ ELEMENTO: .sidebar-card__icon
+    └─ Ícono junto al título
+
+
+📦 BLOQUE: .monitoring-section (Sección de monitoreo)
+│
+└─ ELEMENTO: .monitoring-section__label
+    └─ Etiqueta de nivel de inventario
+
+
+📦 BLOQUE: .main (Contenedor principal)
+│
+└─ ELEMENTO: .main__container
+    └─ Contenedor con padding
+
+═════════════════════════════════════════════════════════════════════════════
+                      VENTAJAS DE USAR BEM EN TU PROYECTO
+═════════════════════════════════════════════════════════════════════════════
+
+1. 🎯 CLARIDAD
+   • Solo viendo el nombre de la clase, sabes qué componente es
+   • Ejemplo: .dashboard-card__value = valor dentro de dashboard-card
+   • No hay ambigüedad
+
+2. 🔄 REUTILIZACIÓN
+   • El bloque .card se usa en varias variantes
+   • Solo cambias con modificadores (.card--success, .card--warning)
+   • Sin duplicar código
+
+3. 🛠️ MANTENIMIENTO
+   • Para cambiar el estilo de TODAS las dashboard cards
+   • Editas SOLO .dashboard-card en un lugar
+   • Los cambios se aplican a todas las instancias
+
+4. 🚫 SIN CONFLICTOS
+   • Cada clase es única dentro de su contexto
+   • .dashboard-card__title no choca con .header__title
+   • Estilos encapsulados
+
+5. 📱 ESCALABILIDAD
+   • Fácil agregar nuevos elementos y modificadores
+   • El código permanece organizado
+   • Otros desarrolladores entienden la estructura
+
+6. ♿ ACCESIBILIDAD
+   • Clases descriptivas ayudan a entender la estructura
+   • Facilita auditorías de accesibilidad
+   • Mejor para SEO
+
+════════════════════════════════════════════════════════════════════════════
+                            REGLAS BEM IMPORTANTES
+════════════════════════════════════════════════════════════════════════════
+
+REGLA 1: Un elemento NO puede contener otro elemento
+─────────────
+❌ MAL:  .block__element__subelement
+✓ BIEN: .block__subelement
+
+Si tienes elementos anidados, mantén la estructura plana:
+  <div class="block">
+    <div class="block__element">
+      <div class="block__subelement">  ← Mismo nivel que el anterior
+        Contenido
+      </div>
+    </div>
+  </div>
+
+REGLA 2: Un modificador debe ir con su bloque/elemento
+─────────────
+❌ MAL:  class="--success"
+✓ BIEN: class="card--success"
+✓ BIEN: class="card dashboard-card--success"
+
+El modificador SIEMPRE se agrega junto a la clase base:
+  <div class="button button--primary">Descargar</div>
+                 ↑ Clase base    ↑ Modificador
+
+REGLA 3: Los modificadores cambian la apariencia, NO la estructura
+─────────────
+❌ MAL:
+.card--highlighted {
+  display: grid;  ← No cambies la estructura
+}
+
+✓ BIEN:
+.card--highlighted {
+  background-color: yellow;
+  border-color: red;
+}
+
+REGLA 4: Los estilos base NO deben estar en el modificador
+─────────────
+❌ MAL:
+.card {
+  border: none;
+}
+
+.card--success {
+  border: none;  ← DUPLICADO
+  border-left-color: green;
+}
+
+✓ BIEN:
+.card {
+  border: none;
+  border-left: 4px solid var(--color-primary);
+}
+
+.card--success {
+  border-left-color: var(--color-success);
+}
+
+════════════════════════════════════════════════════════════════════════════
+                    NUEVAS CLASES BEM AGREGADAS A TU CSS
+════════════════════════════════════════════════════════════════════════════
+
+1. .main__container
+   BLOQUE: .main
+   ELEMENTO: .main__container
+   FUNCIÓN: Contenedor principal de la página con padding
+   CSS:
+     .main__container {
+       padding: 2rem 1rem;
+     }
+   HTML:
+     <div class="container-fluid main__container">
+
+2. .dashboard__title
+   BLOQUE: .dashboard
+   ELEMENTO: .dashboard__title
+   FUNCIÓN: Título principal del dashboard
+   CSS:
+     .dashboard__title {
+       font-size: 1.8rem;
+       color: var(--color-dark);
+       font-weight: 700;
+       margin-bottom: 2rem;
+     }
+   HTML:
+     <h4 class="dashboard__title">📊 Dashboard</h4>
+
+3. .dashboard-card--success
+   BLOQUE: .dashboard-card
+   MODIFICADOR: --success
+   FUNCIÓN: Variante verde para ventas positivas
+   CSS:
+     .dashboard-card--success {
+       border-left-color: var(--color-success);
+       background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, ...);
+     }
+   HTML:
+     <div class="card dashboard-card dashboard-card--success">
+
+4. .dashboard-card--warning
+   BLOQUE: .dashboard-card
+   MODIFICADOR: --warning
+   FUNCIÓN: Variante naranja para inventario bajo
+   CSS:
+     .dashboard-card--warning {
+       border-left-color: var(--color-warning);
+       background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, ...);
+     }
+   HTML:
+     <div class="card dashboard-card dashboard-card--warning">
+
+5. .dashboard-card__header
+   BLOQUE: .dashboard-card
+   ELEMENTO: .dashboard-card__header
+   FUNCIÓN: Encabezado de la tarjeta (ícono + título)
+   CSS:
+     .dashboard-card__header {
+       display: flex;
+       align-items: center;
+       margin-bottom: 1rem;
+     }
+   HTML:
+     <div class="dashboard-card__header">
+       <div class="dashboard-card-icon">...</div>
+       <h5 class="card-title">...</h5>
+     </div>
+
+6. .dashboard-card__value
+   BLOQUE: .dashboard-card
+   ELEMENTO: .dashboard-card__value
+   FUNCIÓN: Mostrar el valor numérico/principal
+   CSS:
+     .dashboard-card__value {
+       color: var(--color-primary);
+       font-weight: 700;
+       margin-top: 1rem;
+       font-size: 1.5rem;
+     }
+   HTML:
+     <h3 class="dashboard-card__value">$0.00</h3>
+
+7. .dashboard-card-icon--success
+   BLOQUE: .dashboard-card-icon
+   MODIFICADOR: --success
+   FUNCIÓN: Ícono con gradiente verde
+   CSS:
+     .dashboard-card-icon--success {
+       background: var(--gradient-success);
+     }
+   HTML:
+     <div class="dashboard-card-icon dashboard-card-icon--success">
+
+8. .dashboard-card-icon--warning
+   BLOQUE: .dashboard-card-icon
+   MODIFICADOR: --warning
+   FUNCIÓN: Ícono con gradiente naranja
+   CSS:
+     .dashboard-card-icon--warning {
+       background: var(--gradient-warning);
+     }
+   HTML:
+     <div class="dashboard-card-icon dashboard-card-icon--warning">
+
+9. .sidebar-card
+   BLOQUE: .sidebar-card
+   FUNCIÓN: Tarjeta del panel lateral (Monitoreo)
+   CSS:
+     .sidebar-card {
+       background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, ...);
+       height: 100%;
+       min-height: 400px;
+     }
+   HTML:
+     <div class="card sidebar-card">
+
+10. .sidebar-card__title
+    BLOQUE: .sidebar-card
+    ELEMENTO: .sidebar-card__title
+    FUNCIÓN: Título del sidebar con ícono
+    CSS:
+      .sidebar-card__title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    HTML:
+      <h5 class="card-title sidebar-card__title">
+
+11. .sidebar-card__icon
+    BLOQUE: .sidebar-card
+    ELEMENTO: .sidebar-card__icon
+    FUNCIÓN: Ícono dentro del título del sidebar
+    CSS:
+      .sidebar-card__icon {
+        color: var(--color-primary);
+      }
+    HTML:
+      <i class="fas fa-chart-line sidebar-card__icon"></i>
+
+12. .monitoring-section
+    BLOQUE: .monitoring-section
+    FUNCIÓN: Sección que contiene las barras de progreso
+    CSS:
+      .monitoring-section {
+        margin-top: 1.5rem;
+      }
+    HTML:
+      <div class="monitoring-section">
+
+13. .monitoring-section__label
+    BLOQUE: .monitoring-section
+    ELEMENTO: .monitoring-section__label
+    FUNCIÓN: Etiqueta de cada nivel de monitoreo
+    CSS:
+      .monitoring-section__label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #374151;
+      }
+    HTML:
+      <label class="monitoring-section__label">Nivel 1</label>
+
+════════════════════════════════════════════════════════════════════════════
+                    COMPARACIÓN: ANTES vs DESPUÉS (CÓDIGO)
+════════════════════════════════════════════════════════════════════════════
+
+TARJETA 1 - ANTES (❌ CON ESTILOS INLINE):
+────────────────────────────────────────────────────────────────────────────
+<div class="card dashboard-card">
+  <div class="card-body">
+    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                ↑ ESTILO INLINE #1 - Código espagueti
+      <div class="dashboard-card-icon">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <h5 class="card-title mb-0">Ventas</h5>
+    </div>
+    <p class="card-text">Total de ventas registradas en el sistema.</p>
+    <h3 style="color: var(--color-primary); font-weight: 700; margin-top: 1rem;">
+          ↑ ESTILO INLINE #2 - Código espagueti
+        $0.00
+    </h3>
+  </div>
+</div>
+
+PROBLEMAS IDENTIFICADOS:
+✗ style="display: flex; align-items: center; margin-bottom: 1rem;"
+  → Este estilo está REPETIDO en las 3 tarjetas
+  → Si lo necesitas cambiar, debes editar 3 lugares
+  → Es propenso a errores e inconsistencias
+
+✗ style="color: var(--color-primary); font-weight: 700; margin-top: 1rem;"
+  → Este también está REPETIDO (con pequeñas variaciones)
+  → Tarjeta 2 tiene "color-success" en lugar de "color-primary"
+  → Tarjeta 3 tiene "color-warning" en lugar de "color-primary"
+  → Imposible mantener consistencia a largo plazo
+
+────────────────────────────────────────────────────────────────────────────
+
+TARJETA 1 - DESPUÉS (✅ CON BEM LIMPIO):
+────────────────────────────────────────────────────────────────────────────
+<div class="card dashboard-card">
+  <div class="card-body">
+    <div class="dashboard-card__header">
+           ↑ CLASE BEM - Claro y mantenible
+      <div class="dashboard-card-icon">
+           ↑ Clase BEM - Elemento del bloque
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <h5 class="card-title mb-0">Ventas</h5>
+    </div>
+    <p class="card-text">Total de ventas registradas en el sistema.</p>
+    <h3 class="dashboard-card__value">
+           ↑ CLASE BEM - Valor de la tarjeta
+        $0.00
+    </h3>
+  </div>
+</div>
+
+VENTAJAS ALCANZADAS:
+✓ HTML completamente limpio - SIN estilos inline
+✓ Clases BEM descriptivas
+✓ .dashboard-card__header se reutiliza sin cambios
+✓ .dashboard-card__value solo se define UNA VEZ en CSS
+✓ Si cambias el estilo, afecta a TODAS las tarjetas automáticamente
+
+CSS CORRESPONDIENTE (TODO CENTRALIZADO):
+┌─────────────────────────────────────────────────────────┐
+│ .dashboard-card__header {                              │
+│   display: flex;                                       │
+│   align-items: center;                                │
+│   margin-bottom: 1rem;                                │
+│ }                                                      │
+│                                                        │
+│ .dashboard-card__value {                              │
+│   color: var(--color-primary);                        │
+│   font-weight: 700;                                   │
+│   margin-top: 1rem;                                   │
+│   font-size: 1.5rem;                                  │
+│ }                                                      │
+│                                                        │
+│ .dashboard-card--success .dashboard-card__value {     │
+│   color: var(--color-success);                        │
+│ }                                                      │
+│                                                        │
+│ .dashboard-card--warning .dashboard-card__value {     │
+│   color: var(--color-warning);                        │
+│ }                                                      │
+└─────────────────────────────────────────────────────────┘
+
+════════════════════════════════════════════════════════════════════════════
+                              CONCLUSIÓN
+════════════════════════════════════════════════════════════════════════════
+
+BEM no es solo un formato de nombres, es una FILOSOFÍA de desarrollo CSS que:
+
+✨ Hace tu código más legible
+✨ Facilita el mantenimiento
+✨ Previene conflictos de estilos
+✨ Permite reutilizar componentes
+✨ Mejora la escalabilidad del proyecto
+
+Ahora que entiendes BEM y tu código lo sigue correctamente:
+✅ HTML limpio sin estilos inline
+✅ CSS centralizado y organizado
+✅ Clases descriptivas y predecibles
+✅ Fácil de escalar y mantener
+✅ Profesional y mantenible a largo plazo
+
+¡Tu proyecto ahora es un EJEMPLO de buenas prácticas! 🚀
+
+════════════════════════════════════════════════════════════════════════════
