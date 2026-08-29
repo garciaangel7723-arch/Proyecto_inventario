@@ -28,6 +28,7 @@ new Chart(grafico, {
     labels: ["En Stock", "Stock Bajo", "Stock Agotado"],
     datasets: [
       {
+        //aqui agregar los datos de inventario en stock y stock bajo y stock agotado en el array data
         data: [80, 32, 12],
         backgroundColor: ["#16805b", "#c26a14", "#c2413a"],
       },
