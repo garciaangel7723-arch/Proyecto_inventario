@@ -1,41 +1,14 @@
 <?php
-$inventario = [
-"manzanas" => 80,
-"peras" => 32,
-"bananas" => 12,
-"aguacate" => 43,
-"melon" => 0,
-"fds" => 80,
-"sdf" => 32,
-"fsddfs" => 12,
-"dsf" => 43,
-"medsflon" => 0,
-"mafdnzanas" => 80,
-"pefras" => 32,
-"fdsfsd" => 12,
-"wwww" => 43,
-"www" => 0,
-"ww" => 80,
-"wwf" => 32,
-"banafnas" => 12,
-"ee" => 43,
-"meflon" => 0,
-"masnzanas" => 80,
-"f" => 32,
-"badnanas" => 12,
-"d" => 43,
-"s" => 0,
-"manxzanas" => 80,
-"dd" => 32,
-"banacnas" => 12,
-"gg" => 43,
-"mel on" => 0,"manzanas" => 80,
-"fff" => 32,
-"ddd" => 12,
-"sss" => 43,
-"sdsdf" => 0,
+header('Content-Type: application/json');
 
-];
+$host = 'localhost';
+$db   = 'proyecto';
+$user = 'root';
+$pass = '';
 
-
-?>
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo json_encode(['error' => $e->getMessage()]);
+}

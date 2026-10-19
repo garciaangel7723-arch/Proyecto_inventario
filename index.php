@@ -1,5 +1,4 @@
 <?php
-include_once 'db/conexion.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +36,7 @@ include_once 'db/conexion.php';
                                 <h5 class="card__title mb-0">Ventas</h5>
                             </div>
                             <p class="card__text">Total de ventas registradas en el sistema.</p>
-                            <h3 class="card__value">$0.00</h3>
+                            <h3 class="card__value">0.00</h3>
                         </div>
                     </div>
 
@@ -51,7 +50,7 @@ include_once 'db/conexion.php';
                                 <h5 class="card__title mb-0">Ventas Mes</h5>
                             </div>
                             <p class="card__text">Ventas del mes actual.</p>
-                            <h3 class="card__value">$0.00</h3>
+                            <h3 class="card__value">0.00</h3>
                         </div>
                     </div>
 

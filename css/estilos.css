@@ -9,7 +9,7 @@
   --fuente-max: 24px;
   --fuente-lg: 20px;
   --fuente-xl: 32px;
-  
+
   /* Paleta operativa para inventario */
   --color-primary: #145c63;
   --color-secondary: #64748b;
@@ -34,10 +34,29 @@
 
 body {
   background: var(--color-light);
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
+}
+/* botones */
+.btn--primary {
+  text-decoration: none;
+  background: rgba(243, 242, 242, 0.164);
+  border: 2px solid rgba(143, 142, 142, 0.075);
+  margin: 0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn--primary:hover {
+  background: rgba(197, 197, 197, 0.404);
+  border-color: rgba(255, 255, 255, 0.42);
+  transform: translateY(-2px);
 }
 
 /* header */
@@ -166,12 +185,19 @@ body {
 .header__icon {
   font-size: var(--fuente-lg);
   color: white;
-  
 }
 
 /* Contenedor principal - Página */
 .dashboard {
   padding: 2rem 1rem;
+}
+
+/* Contenedor principal dashboard */
+.dashboard__layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Título del dashboard */
@@ -181,14 +207,6 @@ body {
   font-weight: 700;
   margin-bottom: 2rem;
   margin-top: 0;
-}
-
-/* Contenedor principal dashboard */
-.dashboard__layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
 }
 
 .dashboard__cards {
@@ -239,7 +257,6 @@ body {
   display: block;
   max-width: 100%;
 }
-
 .card__image--bootstrap {
   width: 100%;
 }
@@ -265,13 +282,17 @@ body {
 }
 
 .card--dashboard::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   right: -10%;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(47, 111, 143, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(47, 111, 143, 0.08) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
 }
 
@@ -282,7 +303,11 @@ body {
 }
 
 .card--success::after {
-  background: radial-gradient(circle, rgba(46, 125, 50, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(46, 125, 50, 0.08) 0%,
+    transparent 70%
+  );
 }
 
 /* Variante de advertencia (naranja) */
@@ -292,7 +317,11 @@ body {
 }
 
 .card--warning::after {
-  background: radial-gradient(circle, rgba(199, 119, 0, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(199, 119, 0, 0.08) 0%,
+    transparent 70%
+  );
 }
 
 .card--pending {
@@ -300,22 +329,34 @@ body {
   background: #eef6fb;
 }
 .card--pending::after {
-  background: radial-gradient(circle, rgba(173, 221, 233, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(173, 221, 233, 0.08) 0%,
+    transparent 70%
+  );
 }
 .card--waiting {
   border-left-color: var(--color-waiting);
   background: #fff8e8;
 }
 .card--waiting::after {
-  background: radial-gradient(circle, rgba(132, 230, 208, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(132, 230, 208, 0.08) 0%,
+    transparent 70%
+  );
 }
 .card--info {
   border-left-color: var(--color-info);
   background: #edf7fb;
 }
 .card--info::after {
-  background: radial-gradient(circle, rgba(209, 232, 244, 0.08) 0%, transparent 70%);
-} 
+  background: radial-gradient(
+    circle,
+    rgba(209, 232, 244, 0.08) 0%,
+    transparent 70%
+  );
+}
 
 /* Header de la tarjeta del dashboard */
 .card__header {
@@ -469,7 +510,7 @@ body {
   .dashboard__layout {
     grid-template-columns: 1fr;
   }
-  
+
   .header__button--menu {
     display: flex;
     align-items: center;
