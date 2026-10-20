@@ -39,6 +39,7 @@
                     </div>
                 </div>
             </div>
+
             <!--columna #2 de inventario-->
             <div>
                 <h4 class="dashboard__title">⚙️Opciones</h4>
@@ -71,24 +72,30 @@
                 </div>
             </div>
     </main>
-    
+
     <!-- El recuadro del formulario (Ventana Modal) -->
-    <dialog id="miModal" class="modal-formulario">
-        <form method="dialog">
-            <h3>Ingresa tus datos</h3>
+    <dialog id="miModal" class="mimodal">
+        <div class="modal__content">
+            <form method="dialog" class="modal__form">
+                <h3 class="modal__title">Nuevo producto <i class="fa-regular fa-square-plus"></i></h3>
+                
+                <div class="form__group">
+                <label class="form__label" for="nombre">Nombre del producto:</label>
+                <input class="form__input" type="text" id="nombre" name="nombre" required placeholder="Nombre del producto">
+                </div>
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                <div class="form__group">
+                <label class="form__label" for="correo">Descripción del producto:</label>
+                <input class="form__input" type="text" id="descripcion" name="Descripcion" required placeholder="Descripción del producto">
+                </div>
 
-            <label for="correo">Correo:</label>
-            <input type="email" id="correo" name="correo" required placeholder="tu@correo.com">
-
-            <div class="botones-form">
-                <!-- Un botón con value="cancel" cierra el diálogo automáticamente sin enviar -->
-                <button type="button" id="btnCancelar">Cancelar</button>
-                <button type="submit" class="btn-guardar">Guardar</button>
-            </div>
-        </form>
+                <div class="botones__form">
+                    <!-- Un botón con value="cancel" cierra el diálogo automáticamente sin enviar -->
+                    <button class="btn-cancel" type="button" id="btnCancelar">Cancelar</button>
+                    <button class="btn-guardar" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
     </dialog>
 
     <!-- Cargar Chart.js desde tu carpeta local -->

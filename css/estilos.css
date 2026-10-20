@@ -1,3 +1,4 @@
+/* #region Configuración global */
 /*importando fuentes*/
 @import url("../assets/css/all.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
@@ -39,6 +40,9 @@ body {
   padding: 0;
   min-height: 100vh;
 }
+/* #endregion */
+
+/* #region Botones */
 /* botones */
 .btn--primary {
   text-decoration: none;
@@ -58,7 +62,9 @@ body {
   border-color: rgba(255, 255, 255, 0.42);
   transform: translateY(-2px);
 }
+/* #endregion */
 
+/* #region Header */
 /* header */
 .header {
   background: var(--gradient-primary);
@@ -186,7 +192,9 @@ body {
   font-size: var(--fuente-lg);
   color: white;
 }
+/* #endregion */
 
+/* #region Dashboard y tarjetas */
 /* Contenedor principal - Página */
 .dashboard {
   padding: 2rem 1rem;
@@ -216,7 +224,9 @@ body {
   gap: 1.5rem;
   padding: 1rem;
 }
+/* #endregion */
 
+/* #region Tarjetas */
 /* Estilos para las tarjetas */
 .card {
   border: none;
@@ -426,7 +436,9 @@ body {
 .card__icon--info {
   background: var(--gradient-info);
 }
+/* #endregion */
 
+/* #region Monitoreo */
 /* Tarjeta del panel lateral (Monitoreo) */
 .card--sidebar {
   background: #f7f9fa;
@@ -505,7 +517,152 @@ body {
   height: 100%;
   width: 100%;
 }
+/* #endregion */
 
+/* #region modal */
+.mimodal[open] {
+  display: flex;
+  flex-direction: column;
+  /* esto es para centrar verticalmente el contenido */
+  justify-content: center;
+  align-items: center;
+  /*  */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__content {
+  background-color: #fefefe;
+  padding: 20px;
+  border:   1px solid #888;
+  border-radius: 8px;
+  max-width: 800px;
+  min-width: 800px;
+}
+.modal__title {
+  margin-top: 0;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  gap: 20px;
+}
+
+.form__label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.form__input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+
+.botones__form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-formulario h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.modal-formulario label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.modal-formulario input[type="text"],
+.modal-formulario input[type="email"],
+.modal-formulario input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-formulario .botones-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-formulario .botones-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-formulario .botones-form button:hover {
+  background-color: #3e8f3e;
+}
+/* #endregion */
+
+/* #region botones */
+.btn-cancel {
+  background-color: #f44336;
+  color: #fff;
+  border: 1px solid #22060671;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+.btn-cancel:hover {
+  background-color: #d32f2f;
+}
+.btn-guardar {
+  background-color: #4caf50;
+  color: #fff;
+  border: 1px solid y#22060671;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+.btn-guardar:hover {
+  background-color: #3e8f3e;
+}
+/* #endregion */
+
+/* #region Diseño responsive */
 @media (max-width: 880px) {
   .dashboard__layout {
     grid-template-columns: 1fr;
@@ -581,3 +738,4 @@ body {
     padding: 1rem;
   }
 }
+/* #endregion */
