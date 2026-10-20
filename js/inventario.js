@@ -67,3 +67,47 @@ btnCrearProducto.addEventListener("click", () => {
 btnCancelar.addEventListener("click", () => {
   modal.close();
 });
+
+// lista de categorias
+document.addEventListener("DOMContentLoaded", () => {
+  //iniciar la busqueda de categorias
+  document.querySelectorAll(".select__busqueda").forEach((elemento) => {
+    const inputTexto = elemento.querySelector(".select__input");
+    const inputHidden = elemento.querySelector(".select__value");
+    const lista = elemento.querySelector(".select__opciones");
+    const opciones = lista.querySelectorAll("li");
+
+    // 1. Mostrar la lista al hacer clic o dar foco al input
+    inputTexto.addEventListener("focus", () => {
+      lista.style.display = "block";
+    });
+
+    // 2. Filtrar las opciones en tiempo real mientras el usuario escribe
+    inputTexto.addEventListener("input", () => {
+      const filtro = inputTexto.value.toLowerCase().trim();
+      lista.style.display = "block";
+
+      opciones.forEach((opcion) => {
+        const texto = opcion.textContent.toLowerCase();
+        if (texto.includes(filtro)) {
+          opcion.style.display = "block";
+        } else {
+          opcion.style.display = "none";
+        }
+      });
+    });
+
+    // 3. Seleccionar una opción al hacer clic sobre ella
+    opciones.forEach(opcion => {
+      opcion.addEventListener("click", () => {
+        //asignar texto al inputTexto visible
+        inputTexto.value = opcion.textContent.trim();
+        //asignar id al inputHidden
+        inputHidden.value = opcion.dataset.id;
+        //cerrar la lista flotante
+        lista.style.display = "none";
+      });
+    });
+
+  });
+});

@@ -662,6 +662,44 @@ body {
 }
 /* #endregion */
 
+/* #region lista */
+/* Contenedor relativo para posicionar la lista flotante */
+.select__busqueda {
+    position: relative;
+}
+
+/* Lista flotante oculta por defecto */
+.select__opciones {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 180px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Estilo para los ítems de la lista */
+.select__opciones li {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Efecto hover sobre cada opción */
+.select__opciones li:hover {
+    background-color: #f0f0f0;
+}
+/* #endregion */
+
 /* #region Diseño responsive */
 @media (max-width: 880px) {
   .dashboard__layout {

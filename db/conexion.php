@@ -1,6 +1,4 @@
 <?php
-header('Content-Type: application/json');
-
 $host = 'localhost';
 $db   = 'proyecto';
 $user = 'root';

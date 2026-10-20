@@ -72,7 +72,7 @@
                         <div class="card__body">
                             <div class="card__header">
                                 <div class="card__icon card__icon--info">
-                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <i class="fa-solid fa-calendar"></i>
                                 </div>
                                 <h5 class="card__title mb-0">Recordatorio a clientes</h5>
                             </div>
@@ -85,7 +85,7 @@
                         <div class="card__body">
                             <div class="card__header">
                                 <div class="card__icon card__icon--pending">
-                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
                                 </div>
                                 <h5 class="card__title mb-0">Equipos en Servicio</h5>
                             </div>
@@ -98,7 +98,7 @@
                         <div class="card__body">
                             <div class="card__header">
                                 <div class="card__icon card__icon--waiting">
-                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <i class="fa-solid fa-hourglass-half"></i>
                                 </div>
                                 <h5 class="card__title mb-0">Equipos en espera</h5>
                             </div>
